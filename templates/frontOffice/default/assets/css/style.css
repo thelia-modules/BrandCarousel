@@ -1,0 +1,52 @@
+/**************** brand banner ****************/
+.brand_carousel {  
+    max-width :inherit;
+    //height: 160%;
+    //border: solid 2px;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    overflow: hidden;
+}
+
+.brand_carousel_element { 
+    padding : 20px;
+    display: table-cell;
+    position : relative;
+    transition-property: left;
+    //visibility: hidden;
+    visibility: visible;
+    left : 0%;
+}
+
+
+.brand{
+    width : 200px;
+    height: 200px;  
+}
+.arrowLeft{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    top: -160px;
+    left: 1.5%;
+    position: relative;
+    transition: 0.5s;
+}
+
+.arrowRight{ 
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    left: 90%;
+    top: -160px;
+    transition: 0.5s;
+}
+
+
+.arrowLeft:hover, .arrowRight:hover{
+    top: -170px;
+}
+
