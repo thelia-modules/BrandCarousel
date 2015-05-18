@@ -3,9 +3,10 @@
     <h3> {intl l="Our brands" d = "brandcarousel.fo.default"} </h3>
     <div class="brand_carousel"> 
         {loop type="brand" name="brandElement"} 
-            {loop type="image" name="imagBrandElement" source="brand" source_id={$LOGO_IMAGE_ID}}
+            {$brand_URL = $URL}
+            {loop type="image" name="imagBrandElement" id=$LOGO_IMAGE_ID source="brand"}
                 <div class="brand_carousel_element">      
-                    <a href={$URL}> 
+                    <a href={$brand_URL}> 
                         <img class ="brand" src="{$IMAGE_URL}" alt="{$TITLE}"/> 
                     </a>  
                 </div>

@@ -3,44 +3,43 @@
     max-width :inherit;
     //height: 160%;
     //border: solid 2px;
-    margin-left: 8%;
-    margin-right: 8%;
+    margin-left: 3%;
+    margin-right: 3%;
     margin-top: 2%;
     margin-bottom: 2%;
     overflow: hidden;
 }
 
 .brand_carousel_element { 
-    padding : 20px;
+    padding : 15px;
     display: table-cell;
     position : relative;
     transition-property: left;
     //visibility: hidden;
     visibility: visible;
-    left : 0%;
+    left : 0px;
 }
 
 
 .brand{
-    width : 200px;
-    height: 200px;  
+    width : 225px;
 }
 .arrowLeft{
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 17px;
+    height: 32px;
     top: -160px;
-    left: 1.5%;
+    left: 0%;
     position: relative;
     transition: 0.5s;
 }
 
 .arrowRight{ 
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 17px;
+    height: 32px;
     position: relative;
-    left: 90%;
+    left: 97%;
     top: -160px;
     transition: 0.5s;
 }
