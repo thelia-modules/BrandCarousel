@@ -1,5 +1,5 @@
 {
-  "name": "devoption/brand-carousel-module",
+  "name": "thelia/brand-carousel-module",
   "license": "LGPL-3.0+",
   "type": "thelia-module",
   "require": {
