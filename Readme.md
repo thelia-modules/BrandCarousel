@@ -19,7 +19,7 @@ The module's hook position can be modified from the back office's module-hooks p
 Add it in your main thelia composer.json file
 
 ```
-composer require thelia/brand-carousel-module : ~1.2.0
+composer require thelia/brand-carousel-module ~1.2.0
 ```
 
 ## Usage
