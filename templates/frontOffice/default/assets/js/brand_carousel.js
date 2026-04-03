@@ -5,44 +5,48 @@
 /*                                                       */
 /*********************************************************/
 
-var brands = [];
-var className = "brand_carousel_element";
-var nbBrand = $("." + className).length;
-var lastBrandIndex = nbBrand - 1;
-var firstBrandIndex = 0;
-var firstVisibleBrandIndex;
-var lastVisibleBrandIndex;
-var interval;
-var animationSpeed = 1;
-var animationFinished = true;
+let brands = [];
+const className = "brand_carousel_element";
+let brandElements = document.querySelectorAll("." + className);
+let nbBrand = brandElements.length;
+let lastBrandIndex = nbBrand - 1;
+let firstBrandIndex = 0;
+let firstVisibleBrandIndex;
+let lastVisibleBrandIndex;
+let interval;
+const animationSpeed = 1;
+let animationFinished = true;
 
 
-window.onload = function () {
-    $(document).ready(function () {
-       if (nbBrand > 4) {
-            setBrands();    
+window.addEventListener('DOMContentLoaded', function () {
+    if (nbBrand > 4) {
+        setBrands();
+        animateBrandsByInterval("Right");
+    }
+});
+
+
+const arrowRight = document.getElementById("arrowRight");
+if (arrowRight) {
+    arrowRight.addEventListener('click', function () {
+        if (animationFinished) {
+            clearInterval(interval);
+            animateBrands("Right");
             animateBrandsByInterval("Right");
-         }
+        }
     });
-};
+}
 
-
-
-$("#arrowRight").click(function () {
-    if (animationFinished) {
-        clearInterval(interval);
-        animateBrands("Right");
-        animateBrandsByInterval("Right");
-    }
-});
-
-$("#arrowLeft").click(function () {
-    if (animationFinished) {
-        clearInterval(interval);
-        animateBrands("Left");
-        animateBrandsByInterval("Right");
-    }
-});
+const arrowLeft = document.getElementById("arrowLeft");
+if (arrowLeft) {
+    arrowLeft.addEventListener('click', function () {
+        if (animationFinished) {
+            clearInterval(interval);
+            animateBrands("Left");
+            animateBrandsByInterval("Right");
+        }
+    });
+}
 
 
 function animateBrandsByInterval(direction) {
@@ -53,15 +57,13 @@ function animateBrandsByInterval(direction) {
 
 
 function setBrands() {
-    var i = 0;
-    var brandElement;
-    while (i < nbBrand) {
-        brandElement = brandSelector(i);
-        brandElement.css("visibility", "visible");
+    for (let i = 0; i < nbBrand; i++) {
+        const brandElement = brandSelector(i);
+        brandElement.style.visibility = "visible";
         brands.push({
-            index: brandElement.index(),
-            sliding: 0});
-        i++;
+            index: i,
+            sliding: 0
+        });
     }
 }
 
@@ -69,14 +71,14 @@ function animateBrands(direction) {
     animationFinished = false;
     if (direction === "Right") {
         moveLastOrFirstBrand(direction);
-        for (var i = 0; i < brands.length; i++) {
+        for (let i = 0; i < brands.length; i++) {
             moveBrand(i, direction);
         }
         if (lastBrandIndex === nbBrand - 1) {
             initleftBrands();
         }
     } else if (direction === "Left"){
-        for (var i = 0; i < brands.length; i++) {
+        for (let i = 0; i < brands.length; i++) {
             moveBrand(i, direction);
         }
         setTimeout(function () {
@@ -85,30 +87,38 @@ function animateBrands(direction) {
                 initleftBrands();
             }
         }, 1000 * animationSpeed);
-
     }
 }
 
 function initleftBrands() {
-    for (var i = 0; i < brands.length; i++) {
+    for (let i = 0; i < brands.length; i++) {
         brands[i].sliding = 0;
-        brandSelector(brands[i].index)
-                .css({left: '0px'});
+        brandSelector(brands[i].index).style.left = '0px';
     }
 }
 
+function getOuterWidth(element) {
+    const styles = window.getComputedStyle(element);
+    const margin = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
+    return element.offsetWidth + margin;
+}
+
+function getInnerWidth(element) {
+    const styles = window.getComputedStyle(element);
+    return element.offsetWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight);
+}
+
 function moveBrand(index, direction) {
-    var brand_model = brands[index];
-    var brand_view = brandSelector(brand_model.index);
+    const brand_model = brands[index];
+    const brand_view = brandSelector(brand_model.index);
     if (direction === "Right") {
-        brand_model.sliding = brand_model.sliding + brand_view.outerWidth();
+        brand_model.sliding = brand_model.sliding + getOuterWidth(brand_view);
     } else if (direction === "Left"){
-        brand_model.sliding = brand_model.sliding - brand_view.outerWidth();
+        brand_model.sliding = brand_model.sliding - getOuterWidth(brand_view);
     }
-    brand_view
-            .css("visibility", "visible")
-            .css("transition-duration", animationSpeed + 's')
-            .css({left: brand_model.sliding + 'px'});
+    brand_view.style.visibility = "visible";
+    brand_view.style.transitionDuration = animationSpeed + 's';
+    brand_view.style.left = brand_model.sliding + 'px';
     brands[index] = brand_model;
 }
 
@@ -135,46 +145,50 @@ function moveLastOrFirstBrand(direction) {
 }
 
 function moveLastToFirst(index) {
-    var brandModel = brands[index];
-    var brandView = $("." + className + ":eq(" + brandModel.index + ")");
-    var left = brandView.offset().left;
-    var leftBrandBanner = $(".brand_carousel:eq(0)").offset().left;
-    var widthBrand = brandView.innerWidth();
-    var nb = (nbBrand - 1) - index;
+    const brandModel = brands[index];
+    const brandElements = document.querySelectorAll("." + className);
+    const brandView = brandElements[brandModel.index];
+    let left = brandView.getBoundingClientRect().left;
+    const brandCarousel = document.querySelector(".brand_carousel");
+    const leftBrandBanner = brandCarousel ? brandCarousel.getBoundingClientRect().left : 0;
+    const widthBrand = getInnerWidth(brandView);
+    const nb = (nbBrand - 1) - index;
     left = left - widthBrand * nb;
     //console.log('left :' + left);
     brandModel.sliding = -(left - leftBrandBanner + widthBrand);
-    brandView
-            .css("transition-duration", '0s')
-            .css("left", brandModel.sliding + 'px')
-            .css("visibility", "hidden");
+    brandView.style.transitionDuration = '0s';
+    brandView.style.left = brandModel.sliding + 'px';
+    brandView.style.visibility = "hidden";
     //console.log('brandModel.sliding :' + brandModel.sliding);
     brands[index] = brandModel;
 }
 
 function moveFirstToLast(index) {
-    var brandModel = brands[index];
-    var brandView = $("." + className + ":eq(" + brandModel.index + ")");
-    var left = brandView.offset().left;
-    var leftLastBrand = brandSelector(lastBrandIndex).offset().left;
-    var widthBrand = brandView.innerWidth();
+    const brandModel = brands[index];
+    const brandElements = document.querySelectorAll("." + className);
+    const brandView = brandElements[brandModel.index];
+    let left = brandView.getBoundingClientRect().left;
+    const leftLastBrand = brandSelector(lastBrandIndex).getBoundingClientRect().left;
+    const widthBrand = getInnerWidth(brandView);
     left = left + widthBrand * index;
     //console.log('left :' + left);
     brandModel.sliding = (leftLastBrand - left);
-    brandView
-            .css("transition-duration", '0s')
-            .css("left", brandModel.sliding + 'px')
-            .css("visibility", "hidden");
+    brandView.style.transitionDuration = '0s';
+    brandView.style.left = brandModel.sliding + 'px';
+    brandView.style.visibility = "hidden";
     //console.log('brandModel.sliding :' + brandModel.sliding);
     brands[index] = brandModel;
 }
 
 function brandSelector(index) {
-    return $("." + className + ":eq(" + index + ")");
+    const brandElements = document.querySelectorAll("." + className);
+    return brandElements[index];
 }
 
-$("." + className).on('transitionend webkitTransitionEnd', function () {
-    animationFinished = true;
+brandElements.forEach(function(element) {
+    element.addEventListener('transitionend', function () {
+        animationFinished = true;
+    });
 });
 
 
