@@ -1,7 +1,7 @@
 
 <section id="brand_carousel">
     <h3> {intl l="Our brands" d = "brandcarousel.fo.default"} </h3>
-    <div class="brand_carousel">
+    <div class="brand_carousel" data-visible-count="{config key="brand_carousel_count"}>
         {loop type="brand" name="brandElement"}
             {$brand_URL = $URL}
             {loop type="image" name="imagBrandElement" id=$LOGO_IMAGE_ID source="brand"}
