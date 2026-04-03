@@ -1,18 +1,10 @@
 # Brand Carousel
 
 This module displays a carousel of brand's logos on the home page.
+The carousel is animated with a fade effect and a slide effect.
+The number of items per page can be modified from the back office's module-configuration page. 
 
 ## Installation
-You can install this module from the back office's modules pages.
-Simply download the zip file, select it using the "Choose file" button, and hit the "Install !" button.
-
-Don't forget to activate it.
-The module's hook position can be modified from the back office's module-hooks page, on home's main area section (home.body)
-
-### Manually
-
-* Copy the module into ```<thelia_root>/local/modules/``` directory and be sure that the name of the module is BrandCarousel.
-* Activate it in your thelia administration panel
 
 ### Composer
 
@@ -24,6 +16,8 @@ composer require thelia/brand-carousel-module ~1.2.0
 
 ## Usage
 
-Click the left or right arrow to animate the carousel.
+Activate the module in the back office.
+If the hook home-body is active, your carousel will be displayed.
+You can modify the number of items per page in the module configuration page by adding the variable `brand_carousel_count` ( default value: 5)
 
 
