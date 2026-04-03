@@ -1,8 +1,8 @@
 
 <section id="brand_carousel">
     <h3> {intl l="Our brands" d = "brandcarousel.fo.default"} </h3>
-    <div class="brand_carousel"> 
-        {loop type="brand" name="brandElement"} 
+    <div class="brand_carousel">
+        {loop type="brand" name="brandElement"}
             {$brand_URL = $URL}
             {loop type="image" name="imagBrandElement" id=$LOGO_IMAGE_ID source="brand"}
                 <div class="brand_carousel_element">      
@@ -13,6 +13,6 @@
             {/loop}
         {/loop}
     </div> 
-   <image id="arrowLeft" class="arrowLeft" src="assets/frontOffice/default/BrandCarousel/assets/img/leftArrow.png"/>
-   <image id="arrowRight" class="arrowRight" src="assets/frontOffice/default/BrandCarousel/assets/img/rightArrow.png"/>
+   <image id="arrowLeft" class="arrowLeft" src="assets/frontOffice/default/BrandCarousel/assets/img/leftArrow.png"></image>
+   <image id="arrowRight" class="arrowRight" src="assets/frontOffice/default/BrandCarousel/assets/img/rightArrow.png"></image>
 </section>

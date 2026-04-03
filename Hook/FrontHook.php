@@ -18,7 +18,7 @@ use Thelia\Core\Hook\BaseHook;
 
 class FrontHook extends BaseHook {
 
-    public function onHomeBody(HookRenderEvent $event)
+    public function onHomeBody(HookRenderEvent $event): void
     {
         $event->add($this->render("home-body.html")); 
     }

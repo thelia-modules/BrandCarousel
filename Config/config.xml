@@ -24,7 +24,7 @@
 
     <hooks>
         <hook id="brandcarousel.hook" class="BrandCarousel\Hook\FrontHook" scope="request">
-            <tag name="hook.event_listener" event="home.body" method= "onHomeBody"/>
+            <tag name="hook.event_listener" event="main.body-bottom" method= "onHomeBody"/>
         </hook>                
         <hook id="brand_carousel.js" class="BrandCarousel\Hook\SetJs" scope="request">
             <tag name="hook.event_listener" event="home.javascript-initialization" type="front" method="setJs"/>
