@@ -18,12 +18,14 @@ use Thelia\Core\Hook\BaseHook;
 
 class SetJs extends BaseHook {
 
-    public function setJs(HookRenderEvent $event) {
+    public function setJs(HookRenderEvent $event): void
+    {
         $content = $this->addJS('assets/js/brand_carousel.js');
         $event->add($content);
     }
     
-    public function setCss(HookRenderEvent $event) {
+    public function setCss(HookRenderEvent $event): void
+    {
         $content = $this->addCss('assets/css/style.css');
         $event->add($content);
     }
